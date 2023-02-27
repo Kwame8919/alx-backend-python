@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch, PropertyMock, Mock
 
 
-class TestGithubOrgClient(unittest.TestCase):
+class TestAccessNestedMap(unittest.TestCase):
     """ Class Gitghub ORG Client """
 
     @parameterized.expand([
