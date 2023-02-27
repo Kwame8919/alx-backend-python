@@ -57,16 +57,7 @@ class TestAccessNestedMap(unittest.TestCase):
             mock_public.assert_called_once()
             mock_json.assert_called_once()
 
-    @parameterized.expand([
-        ({"license": {"key": "my_license"}}, "my_license", True),
-        ({"license": {"key": "other_license"}}, "my_license", False)
-    ])
     
-   
-    def test_has_license(self, repo, license_key, expected):
-        """ unit-test for GithubOrgClient.has_license """
-        result = GithubOrgClient.has_license(repo, license_key)
-        self.assertEqual(result, expected)
 
 
 @parameterized_class(
@@ -98,7 +89,18 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(test_class.public_repos(), self.expected_repos)
         self.assertEqual(test_class.public_repos("XLICENSE"), [])
         self.mock.assert_called()
-
+    
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    
+   
+    def test_has_license(self, repo, license_key, expected):
+        """ unit-test for GithubOrgClient.has_license """
+        result = GithubOrgClient.has_license(repo, license_key)
+        self.assertEqual(result, expected)
+        
     def test_public_repos_with_license(self):
         """ Rrepos with license """
         test_class = GithubOrgClient("google")
