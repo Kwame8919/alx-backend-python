@@ -62,10 +62,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"license": {"key": "other_license"}}, "my_license", False)
     ])
     
-    @parameterized.expand([
-        ('google'),
-        ('abc')
-    ])
+   
     def test_has_license(self, repo, license_key, expected):
         """ unit-test for GithubOrgClient.has_license """
         result = GithubOrgClient.has_license(repo, license_key)
@@ -76,7 +73,7 @@ class TestAccessNestedMap(unittest.TestCase):
     ("org_payload", "repos_payload", "expected_repos", "apache2_repos"),
     TEST_PAYLOAD
 )
-class TestIntegrationGithubOrgClient(unittest.TestCase):
+class TestGithubOrgClient(unittest.TestCase):
     """ Tests fixture github org client """
 
     @classmethod
