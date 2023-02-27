@@ -79,6 +79,16 @@ class TestGithubOrgClient(unittest.TestCase):
         cls.get_patcher = patch('requests.get', **conf)
 
         cls.mock = cls.get_patcher.start()
+    
+    def test_public_repos_url(self):
+        """ Test the public repo url """
+        with patch('client.GithubOrgClient.org',
+                   new_callable=PropertyMock) as mock:
+            payload = {"repos_url": "World"}
+            mock.return_value = payload
+            test_class = GithubOrgClient('test')
+            result = test_class._public_repos_url
+            self.assertEqual(result, payload["repos_url"])
 
     def test_public_repos(self):
         """ More integration """
